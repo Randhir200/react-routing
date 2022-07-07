@@ -1,10 +1,32 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+const links = [
+  { to: '/', title: 'Home' },
+  { to: '/about', title: 'About' },
+  { to: '/products/2', title: 'Product' },
+  { to: '/users', title: 'Users' },
+  { to: '/contacts', title: 'Contacts' },
+];
 export default function Navbar() {
+  let activeStyle = {
+    textDecoration: 'none',
+    color: 'red',
+  };
+  let baseStyle = {
+    textDecoration: 'none',
+    color: 'black',
+  };
+
   return (
-    <div>
-      <Link to='/'>Home</Link>
-      <Link to='/about'>About</Link>
-      <Link to='/products'>Products</Link>
+    <div className='navbar'>
+      {links.map((el) => (
+        <NavLink
+          style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
+          to={el.to}
+          key={el.to}
+        >
+          {el.title}
+        </NavLink>
+      ))}
     </div>
   );
 }
